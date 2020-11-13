@@ -36,34 +36,59 @@ export default {
       this.checkForWinner();
     },
     checkForWinner() {
-      // TODO: fix it to be able to use with any given array, matrix etc... 
-      for (let i = 0; i < this.cells.length - 2; i++) {
-        if (
-          this.cells[0].value &&
-          this.cells[0].value === this.cells[4].value &&
-          this.cells[8].value
-        ) {
-          this.winner = this.winnerName(this.cells[0].value);
-          return;
-        }
-        if (
-          this.cells[2].value &&
-          this.cells[2].value === this.cells[4].value &&
-          this.cells[6].value
-        ) {
-          this.winner = this.winnerName(this.cells[2].value);
-          return;
+        const lines = [
+          [0, 1, 2],
+          [3, 4, 5],
+          [6, 7, 8],
+          [0, 3, 6],
+          [1, 4, 7],
+          [2, 5, 8],
+          [0, 4, 8],
+          [2, 4, 6],
+        ];
+        for (let i = 0; i < lines.length; i++) {
+          const [a, b, c] = lines[i];
+          if (
+            this.cells[a].value &&
+            this.cells[a].value === this.cells[b].value &&
+            this.cells[b].value === this.cells[c].value
+          ) {
+            this.winner = this.winnerName(this.cells[a].value);
+          //   this.resetTheGame()
+            return;
+          }
         }
 
-        if (
-          this.cells[i].value &&
-          this.cells[i].value === this.cells[i + 1].value &&
-          this.cells[i + 2].value
-        ) {
-          this.winner = this.winnerName(this.cells[i].value);
-          return;
-        }
-      }
+      
+      // TODO: fix this to use it with any array, matrix, etc 
+
+      // for (let i = 0; i < this.cells.length - 2; i++) {
+      //   if (
+      //     this.cells[0].value &&
+      //     this.cells[0].value === this.cells[4].value &&
+      //     this.cells[8].value
+      //   ) {
+      //     this.winner = this.winnerName(this.cells[0].value);
+      //     return;
+      //   }
+      //   if (
+      //     this.cells[2].value &&
+      //     this.cells[2].value === this.cells[4].value &&
+      //     this.cells[6].value
+      //   ) {
+      //     this.winner = this.winnerName(this.cells[2].value);
+      //     return;
+      //   }
+
+      //   if (
+      //     this.cells[i].value &&
+      //     this.cells[i].value === this.cells[i + 1].value &&
+      //     this.cells[i + 2].value
+      //   ) {
+      //     this.winner = this.winnerName(this.cells[i].value);
+      //     return;
+      //   }
+      // }
     },
     resetTheGame() {
       for (let i = 0; i < this.cells.length; i++) {
